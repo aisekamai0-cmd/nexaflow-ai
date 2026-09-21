@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaFlow AI Agent</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#050816;
+color:#fff;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+.chat{
+width:100%;
+max-width:520px;
+height:720px;
+background:#0b1220;
+border:1px solid #243449;
+border-radius:24px;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+.header{
+padding:22px;
+background:linear-gradient(135deg,#0f1b30,#0b1425);
+border-bottom:1px solid #243449;
+}
+.brand{font-size:20px;font-weight:800}
+.brand span{color:#67e8f9}
+.status{font-size:13px;color:#67e8f9;margin-top:5px}
+.messages{
+flex:1;
+padding:22px;
+overflow-y:auto;
+}
+.msg{
+max-width:82%;
+padding:13px 16px;
+border-radius:16px;
+margin-bottom:12px;
+font-size:15px;
+}
+.bot{
+background:#162235;
+color:#dbeafe;
+border-bottom-left-radius:5px;
+}
+.user{
+background:linear-gradient(135deg,#0891b2,#2563eb);
+margin-left:auto;
+border-bottom-right-radius:5px;
+}
+.quick{
+display:flex;
+gap:8px;
+padding:0 18px 12px;
+flex-wrap:wrap;
+}
+.quick button{
+background:#111c2d;
+color:#cbd5e1;
+border:1px solid #29384d;
+border-radius:20px;
+padding:8px 12px;
+font-size:12px;
+}
+.input-area{
+display:flex;
+gap:8px;
+padding:16px;
+border-top:1px solid #243449;
+}
+input{
+flex:1;
+background:#111a2a;
+border:1px solid #29384d;
+color:#fff;
+border-radius:12px;
+padding:14px;
+outline:none;
+}
+.send{
+border:0;
+border-radius:12px;
+padding:0 18px;
+background:#67e8f9;
+color:#041018;
+font-weight:800;
+}
+.lead{
+display:none;
+padding:18px;
+border-top:1px solid #243449;
+background:#0e1828;
+}
+.lead h3{margin:0 0 12px}
+.lead input{
+width:100%;
+margin-bottom:9px;
+display:block;
+}
+.lead button{
+width:100%;
+padding:12px;
+border:0;
+border-radius:10px;
+background:#67e8f9;
+font-weight:800;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat">
+
+<div class="header">
+<div class="brand">NexaFlow <span>AI</span></div>
+<div class="status">● AI Customer Support & Lead Generation</div>
+</div>
+
+<div class="messages" id="messages">
+<div class="msg bot">
+Hi! 👋 Welcome to Nexa Dental Clinic.<br><br>
+I can help you with our services, prices, opening hours, location, or booking an appointment.
+</div>
+</div>
+
+<div class="quick">
+<button onclick="quick('What services do you offer?')">Services</button>
+<button onclick="quick('What are your opening hours?')">Hours</button>
+<button onclick="quick('Where are you located?')">Location</button>
+<button onclick="quick('I want to book an appointment')">Book Appointment</button>
+</div>
+
+<div class="input-area">
+<input id="input" placeholder="Type your message..." onkeydown="if(event.key==='Enter')send()">
+<button class="send" onclick="send()">Send</button>
+</div>
+
+<div class="lead" id="lead">
+<h3>Book Your Appointment</h3>
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Phone Number">
+<input id="time" placeholder="Preferred Appointment Time">
+<button onclick="submitLead()">Submit Request</button>
+</div>
+
+</div>
+
+<script>
+const messages=document.getElementById("messages");
+
+function add(text,type){
+const div=document.createElement("div");
+div.className="msg "+type;
+div.innerHTML=text;
+messages.appendChild(div);
+messages.scrollTop=messages.scrollHeight;
+}
+
+function quick(text){
+document.getElementById("input").value=text;
+send();
+}
+
+function send(){
+const input=document.getElementById("input");
+const text=input.value.trim();
+if(!text)return;
+
+add(text,"user");
+input.value="";
+
+setTimeout(()=>{
+let t=text.toLowerCase();
+let reply="Thanks for contacting Nexa Dental Clinic. I can help with services, opening hours, location, or appointments.";
+
+if(t.includes("service")||t.includes("offer")){
+reply="We offer:<br>• Dental Checkup<br>• Cleaning<br>• Fillings<br>• Teeth Whitening";
+}
+else if(t.includes("hour")||t.includes("open")){
+reply="We are open daily from <b>10:00 AM to 10:00 PM</b>.";
+}
+else if(t.includes("location")||t.includes("where")){
+reply="We are located in <b>Karachi, Pakistan</b>.";
+}
+else if(t.includes("book")||t.includes("appointment")||t.includes("cleaning")||t.includes("whitening")||t.includes("filling")){
+reply="Absolutely! I can help you book an appointment. Please enter your details below.";
+document.getElementById("lead").style.display="block";
+}
+
+add(reply,"bot");
+},500);
+}
+
+function submitLead(){
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const time=document.getElementById("time").value.trim();
+
+if(!name||!phone||!time){
+alert("Please complete all fields.");
+return;
+}
+
+add("Thank you, <b>"+name+"</b>! Your appointment request has been received for <b>"+time+"</b>. Our team will contact you at <b>"+phone+"</b>.","bot");
+
+document.getElementById("lead").style.display="none";
+}
+</script>
+
+</body>
+</html>
