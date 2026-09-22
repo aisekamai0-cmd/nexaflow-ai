@@ -1,232 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NexaFlow AI Agent</title>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Nexa Dental Clinic - Appointment Agent</title>
+
 <style>
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#050816;
-color:#fff;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
+
+* {
+    box-sizing: border-box;
 }
-.chat{
-width:100%;
-max-width:520px;
-height:720px;
-background:#0b1220;
-border:1px solid #243449;
-border-radius:24px;
-display:flex;
-flex-direction:column;
-overflow:hidden;
-box-shadow:0 25px 80px rgba(0,0,0,.45);
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0f172a;
+    color: #ffffff;
 }
-.header{
-padding:22px;
-background:linear-gradient(135deg,#0f1b30,#0b1425);
-border-bottom:1px solid #243449;
+
+.container {
+    width: 100%;
+    max-width: 680px;
+    margin: auto;
+    padding: 20px;
 }
-.brand{font-size:20px;font-weight:800}
-.brand span{color:#67e8f9}
-.status{font-size:13px;color:#67e8f9;margin-top:5px}
-.messages{
-flex:1;
-padding:22px;
-overflow-y:auto;
+
+/* HEADER */
+
+.header {
+    text-align: center;
+    padding: 25px 10px;
 }
-.msg{
-max-width:82%;
-padding:13px 16px;
-border-radius:16px;
-margin-bottom:12px;
-font-size:15px;
+
+.logo {
+    font-size: 46px;
 }
-.bot{
-background:#162235;
-color:#dbeafe;
-border-bottom-left-radius:5px;
+
+.header h1 {
+    margin: 10px 0 5px;
+    font-size: 28px;
 }
-.user{
-background:linear-gradient(135deg,#0891b2,#2563eb);
-margin-left:auto;
-border-bottom-right-radius:5px;
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 15px;
 }
-.quick{
-display:flex;
-gap:8px;
-padding:0 18px 12px;
-flex-wrap:wrap;
+
+/* MAIN CARD */
+
+.card {
+    background: #1e293b;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
-.quick button{
-background:#111c2d;
-color:#cbd5e1;
-border:1px solid #29384d;
-border-radius:20px;
-padding:8px 12px;
-font-size:12px;
+
+/* BOT */
+
+.bot {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 22px;
 }
-.input-area{
-display:flex;
-gap:8px;
-padding:16px;
-border-top:1px solid #243449;
+
+.bot-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
 }
-input{
-flex:1;
-background:#111a2a;
-border:1px solid #29384d;
-color:#fff;
-border-radius:12px;
-padding:14px;
-outline:none;
+
+.bot-message {
+    background: #334155;
+    padding: 14px;
+    border-radius: 12px;
+    line-height: 1.5;
+    font-size: 15px;
 }
-.send{
-border:0;
-border-radius:12px;
-padding:0 18px;
-background:#67e8f9;
-color:#041018;
-font-weight:800;
+
+/* FORM */
+
+label {
+    display: block;
+    margin-top: 17px;
+    margin-bottom: 7px;
+    color: #cbd5e1;
+    font-size: 14px;
 }
-.lead{
-display:none;
-padding:18px;
-border-top:1px solid #243449;
-background:#0e1828;
+
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
 }
-.lead h3{margin:0 0 12px}
-.lead input{
-width:100%;
-margin-bottom:9px;
-display:block;
+
+input:focus,
+select:focus {
+    border-color: #2563eb;
 }
-.lead button{
-width:100%;
-padding:12px;
-border:0;
-border-radius:10px;
-background:#67e8f9;
-font-weight:800;
+
+/* SUBMIT BUTTON */
+
+button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* RED ERROR PORTION */
+
+.error-box {
+    display: none;
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #7f1d1d;
+    border: 1px solid #ef4444;
+    color: #fecaca;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* SUCCESS */
+
+.success {
+    display: none;
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #064e3b;
+    border: 1px solid #10b981;
+}
+
+.success h3 {
+    margin-top: 0;
+}
+
+/* WHATSAPP */
+
+.whatsapp {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.whatsapp:hover {
+    opacity: 0.9;
+}
+
+/* INFO */
+
+.info {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #0f172a;
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 13px;
+    padding: 25px 0;
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<div class="chat">
 
-<div class="header">
-<div class="brand">NexaFlow <span>AI</span></div>
-<div class="status">● AI Customer Support & Lead Generation</div>
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">
+            🦷
+        </div>
+
+        <h1>
+            Nexa Dental Clinic
+        </h1>
+
+        <div class="subtitle">
+            AI Appointment Assistant
+        </div>
+
+    </div>
+
+
+    <!-- MAIN CARD -->
+
+    <div class="card">
+
+
+        <!-- AI MESSAGE -->
+
+        <div class="bot">
+
+            <div class="bot-icon">
+                🤖
+            </div>
+
+            <div class="bot-message">
+
+                Hello! 👋 I'm Nexa Dental Clinic's
+                appointment assistant.
+
+                <br><br>
+
+                I can help you prepare an appointment
+                request. Please enter your details below.
+
+            </div>
+
+        </div>
+
+
+        <!-- NAME -->
+
+        <label for="name">
+            Your Name
+        </label>
+
+        <input
+            id="name"
+            type="text"
+            placeholder="Enter your name"
+        >
+
+
+        <!-- PHONE -->
+
+        <label for="phone">
+            Phone / WhatsApp Number
+        </label>
+
+        <input
+            id="phone"
+            type="tel"
+            placeholder="03XXXXXXXXX"
+        >
+
+
+        <!-- GENDER -->
+
+        <label for="gender">
+            Gender
+        </label>
+
+        <select id="gender">
+
+            <option value="">
+                Select gender
+            </option>
+
+            <option value="Male">
+                Male
+            </option>
+
+            <option value="Female">
+                Female
+            </option>
+
+            <option value="Prefer not to say">
+                Prefer not to say
+            </option>
+
+        </select>
+
+
+        <!-- SERVICE -->
+
+        <label for="service">
+            Dental Service
+        </label>
+
+        <select id="service">
+
+            <option value="">
+                Select a service
+            </option>
+
+            <option value="Dental Checkup">
+                Dental Checkup
+            </option>
+
+            <option value="Teeth Cleaning">
+                Teeth Cleaning
+            </option>
+
+            <option value="Tooth Pain">
+                Tooth Pain
+            </option>
+
+            <option value="Dental Filling">
+                Dental Filling
+            </option>
+
+            <option value="Root Canal">
+                Root Canal
+            </option>
+
+            <option value="Teeth Whitening">
+                Teeth Whitening
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+
+        <!-- TIME -->
+
+        <label for="time">
+            Preferred Appointment Time
+        </label>
+
+        <select id="time">
+
+            <option value="">
+                Select preferred time
+            </option>
+
+            <option value="Morning">
+                Morning
+            </option>
+
+            <option value="Afternoon">
+                Afternoon
+            </option>
+
+            <option value="Evening">
+                Evening
+            </option>
+
+        </select>
+
+
+        <!-- SUBMIT -->
+
+        <button onclick="submitLead()">
+
+            📅 Request Appointment
+
+        </button>
+
+
+        <!-- RED ERROR -->
+
+        <div id="errorBox" class="error-box">
+
+            ⚠️ Please complete all required fields
+            before submitting your appointment request.
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div id="lead" class="success">
+
+        </div>
+
+
+        <!-- INFO -->
+
+        <div class="info">
+
+            🔒 Your information is used only to prepare
+            your appointment request.
+
+            <br><br>
+
+            📱 After submitting, WhatsApp will open
+            with the complete appointment details.
+
+        </div>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Nexa Dental Clinic
+        <br>
+        AI Appointment Assistant
+
+    </div>
+
+
 </div>
 
-<div class="messages" id="messages">
-<div class="msg bot">
-Hi! 👋 Welcome to Nexa Dental Clinic.<br><br>
-I can help you with our services, prices, opening hours, location, or booking an appointment.
-</div>
-</div>
 
-<div class="quick">
-<button onclick="quick('What services do you offer?')">Services</button>
-<button onclick="quick('What are your opening hours?')">Hours</button>
-<button onclick="quick('Where are you located?')">Location</button>
-<button onclick="quick('I want to book an appointment')">Book Appointment</button>
-</div>
-
-<div class="input-area">
-<input id="input" placeholder="Type your message..." onkeydown="if(event.key==='Enter')send()">
-<button class="send" onclick="send()">Send</button>
-</div>
-
-<div class="lead" id="lead">
-<h3>Book Your Appointment</h3>
-<input id="name" placeholder="Full Name">
-<input id="time" placeholder="Preferred Appointment Time"> 
-<input id="phone" type="tel" placeholder="WhatsApp / Phone Number">
-<button onclick="submitLead()">Submit Request</button>
-</div>
-
-</div>
 
 <script>
-const messages=document.getElementById("messages");
 
-function add(text,type){
-const div=document.createElement("div");
-div.className="msg "+type;
-div.innerHTML=text;
-messages.appendChild(div);
-messages.scrollTop=messages.scrollHeight;
+
+/* =========================================
+   NEXA DENTAL CLINIC APPOINTMENT AGENT
+   ========================================= */
+
+
+/* WhatsApp destination number */
+
+const WHATSAPP_NUMBER = "923346601267";
+
+
+/* =========================================
+   SUBMIT APPOINTMENT
+   ========================================= */
+
+function submitLead() {
+
+
+    /* Get form values */
+
+    const name =
+        document.getElementById("name").value.trim();
+
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+
+    const gender =
+        document.getElementById("gender").value;
+
+
+    const service =
+        document.getElementById("service").value;
+
+
+    const time =
+        document.getElementById("time").value;
+
+
+    /* Get message boxes */
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+
+    const lead =
+        document.getElementById("lead");
+
+
+    /* Hide previous messages */
+
+    errorBox.style.display = "none";
+
+    lead.style.display = "none";
+
+
+    /* =====================================
+       VALIDATION
+       ===================================== */
+
+    if (
+        name === "" ||
+        phone === "" ||
+        gender === "" ||
+        service === "" ||
+        time === ""
+    ) {
+
+        errorBox.style.display = "block";
+
+        return;
+
+    }
+
+
+    /* =====================================
+       CREATE WHATSAPP MESSAGE
+       ===================================== */
+
+    const message =
+`New Appointment Lead - Nexa Dental Clinic
+
+Name: ${name}
+
+Phone: ${phone}
+
+Gender: ${gender}
+
+Dental Service: ${service}
+
+Preferred Time: ${time}
+
+Please contact the patient to confirm the appointment.`;
+
+
+    /* =====================================
+       CREATE WHATSAPP URL
+       ===================================== */
+
+    const whatsappURL =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    /* =====================================
+       SHOW SUCCESS
+       ===================================== */
+
+    lead.style.display = "block";
+
+
+    lead.innerHTML =
+
+        "<h3>Lead Ready ✅</h3>" +
+
+        "<p>" +
+        "Thank you, <strong>" +
+        escapeHTML(name) +
+        "</strong>!" +
+        "</p>" +
+
+        "<p>" +
+        "Your appointment request has been prepared." +
+        "</p>" +
+
+        "<a " +
+        "class='whatsapp' " +
+        "href='" +
+        whatsappURL +
+        "' " +
+        "target='_blank'>" +
+
+        "💬 Send Appointment on WhatsApp" +
+
+        "</a>";
+
 }
 
-function quick(text){
-document.getElementById("input").value=text;
-send();
+
+/* =========================================
+   SECURITY HELPER
+   ========================================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
 }
 
-function send(){
-const input=document.getElementById("input");
-const text=input.value.trim();
-if(!text)return;
 
-add(text,"user");
-input.value="";
-
-setTimeout(()=>{
-let t=text.toLowerCase();
-let reply="Thanks for contacting Nexa Dental Clinic. I can help with services, opening hours, location, or appointments.";
-
-if(t.includes("service")||t.includes("offer")){
-reply="We offer:<br>• Dental Checkup<br>• Cleaning<br>• Fillings<br>• Teeth Whitening";
-}
-else if(t.includes("hour")||t.includes("open")){
-reply="We are open daily from <b>10:00 AM to 10:00 PM</b>.";
-}
-else if(t.includes("location")||t.includes("where")){
-reply="We are located in <b>Karachi, Pakistan</b>.";
-}
-else if(t.includes("book")||t.includes("appointment")||t.includes("cleaning")||t.includes("whitening")||t.includes("filling")){
-reply="Absolutely! I can help you book an appointment. Please enter your details below.";
-document.getElementById("lead").style.display="block";
-}
-
-add(reply,"bot");
-},500);
-}
-
-function submitLead(){
-const name=document.getElementById("name").value.trim();
-const phone=document.getElementById("phone").value.trim();
-const time=document.getElementById("time").value.trim();
-
-if(!name||!phone||!time){
-alert("Please complete all fields.");
-return;
-}
-
-const message =
-"New Appointment Lead - Nexa Dental Clinic%0A" +
-"Name: " + encodeURIComponent(name) + "%0A" +
-"Phone: " + encodeURIComponent(phone) + "%0A" +
-"Preferred Time: " + encodeURIComponent(time);
-
-add("Thank you, <b>"+name+"</b>! Your appointment request is ready to send to our team.","bot");
-
-document.getElementById("lead").innerHTML =
-"<h3>Lead Ready ✅</h3>" +
-"<p style='color:#94a3b8;margin-bottom:12px'>Tap below to send this lead via WhatsApp.</p>" +
-"<a href='https://wa.me/923346601267?text='+message+"' target='_blank' style='display:block;text-align:center;padding:13px;background:#67e8f9;color:#041018;border-radius:10px;text-decoration:none;font-weight:800'>Send Lead on WhatsApp →</a>";
-}
 </script>
 
+
 </body>
+
 </html>
