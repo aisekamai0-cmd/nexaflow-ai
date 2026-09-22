@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaFlow AI — Leads</title>
 
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#07111f;
+    color:#fff;
+}
+
+header{
+    padding:20px;
+    background:#0b1728;
+    border-bottom:1px solid #1e334d;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#67e8f9;
+}
+
+.container{
+    max-width:1000px;
+    margin:30px auto;
+    padding:0 18px;
+}
+
+h1{
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#94a3b8;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#0d1b2e;
+    border:1px solid #1e334d;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #1e334d;
+}
+
+th{
+    color:#67e8f9;
+    font-size:14px;
+}
+
+td{
+    color:#dbeafe;
+}
+
+.empty{
+    padding:40px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+@media(max-width:700px){
+    .card{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:650px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Nexa<span>Flow</span> AI</div>
+</header>
+
+<div class="container">
+
+<h1>Lead Dashboard</h1>
+<div class="subtitle">
+    Customer leads captured by your AI agents.
+</div>
+
+<div class="card">
+
+<table>
+<thead>
+<tr>
+    <th>Name</th>
+    <th>WhatsApp / Phone</th>
+    <th>Preferred Time</th>
+    <th>Date</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody id="leadsTable">
+
+<tr>
+    <td colspan="5" class="empty">
+        No leads yet.
+    </td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
