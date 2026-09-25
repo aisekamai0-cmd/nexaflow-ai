@@ -4,34 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NexaFlow AI — Customer Agent</title>
+<title>NexaFlow AI — Lead Dashboard</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at top right,#123b52 0,transparent 35%),
-        #06101d;
+    background:#06101d;
     color:#fff;
-    min-height:100vh;
 }
 
 header{
-    height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 22px;
-    background:rgba(6,16,29,.92);
-    border-bottom:1px solid #1d3349;
-    position:sticky;
-    top:0;
-    z-index:10;
+    padding:20px;
+    background:#0b1728;
+    border-bottom:1px solid #1e334d;
 }
 
 .logo{
@@ -43,231 +31,89 @@ header{
     color:#67e8f9;
 }
 
-.status{
-    font-size:12px;
-    color:#67e8f9;
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.dot{
-    width:8px;
-    height:8px;
-    background:#22c55e;
-    border-radius:50%;
-}
-
-.wrapper{
-    max-width:850px;
+.container{
+    max-width:1100px;
     margin:30px auto;
-    padding:0 15px;
+    padding:0 18px;
 }
 
-.agent-card{
-    background:rgba(13,27,46,.94);
-    border:1px solid #1e3a52;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
+h1{
+    margin-bottom:8px;
 }
 
-.agent-top{
-    padding:24px;
-    border-bottom:1px solid #1e3349;
-}
-
-.agent-top h1{
-    margin:0 0 7px;
-    font-size:25px;
-}
-
-.agent-top p{
-    margin:0;
+.subtitle{
     color:#94a3b8;
-    font-size:14px;
+    margin-bottom:25px;
 }
 
-.chat{
-    height:420px;
-    overflow-y:auto;
-    padding:20px;
-}
-
-.message{
-    max-width:82%;
-    padding:12px 15px;
-    margin-bottom:13px;
+.card{
+    background:#0d1b2e;
+    border:1px solid #1e334d;
     border-radius:14px;
-    line-height:1.5;
-    font-size:14px;
+    overflow:hidden;
 }
 
-.bot{
-    background:#13263a;
-    border:1px solid #23415a;
-    color:#e2e8f0;
-    border-bottom-left-radius:4px;
+table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-.user{
-    background:#67e8f9;
-    color:#041018;
-    margin-left:auto;
-    border-bottom-right-radius:4px;
-    font-weight:600;
+th,td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #1e334d;
 }
 
-.quick{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    padding:0 20px 15px;
-}
-
-.quick button{
-    border:1px solid #2c5068;
-    background:#102238;
-    color:#cceff5;
-    padding:9px 13px;
-    border-radius:20px;
-    cursor:pointer;
+th{
+    color:#67e8f9;
     font-size:13px;
 }
 
-.quick button:hover{
-    background:#17324b;
+td{
+    color:#dbeafe;
 }
 
-.input-area{
-    display:flex;
-    gap:10px;
-    padding:15px 20px 20px;
-    border-top:1px solid #1e3349;
+.status{
+    color:#22c55e;
+    font-weight:700;
 }
 
-.input-area input{
-    flex:1;
-    background:#081726;
-    border:1px solid #29445b;
-    color:#fff;
-    padding:13px;
-    border-radius:11px;
-    outline:none;
-}
-
-.input-area input:focus{
-    border-color:#67e8f9;
-}
-
-.send{
-    background:#67e8f9;
-    color:#041018;
-    border:none;
-    padding:0 19px;
-    border-radius:11px;
-    font-weight:800;
-    cursor:pointer;
-}
-
-.lead{
-    display:none;
-    margin:0 20px 20px;
-    padding:20px;
-    background:#0a1929;
-    border:1px solid #29445b;
-    border-radius:15px;
-}
-
-.lead h3{
-    margin:0 0 15px;
-    color:#67e8f9;
-}
-
-.field{
-    margin-bottom:12px;
-}
-
-.field label{
-    display:block;
-    margin-bottom:6px;
-    font-size:12px;
+.empty{
+    padding:40px;
+    text-align:center;
     color:#94a3b8;
 }
 
-.field input{
-    width:100%;
-    padding:12px;
-    background:#071522;
-    border:1px solid #29445b;
-    border-radius:9px;
-    color:#fff;
-    outline:none;
+.loading{
+    padding:40px;
+    text-align:center;
+    color:#67e8f9;
 }
 
-.book-btn{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:10px;
+.error{
+    padding:25px;
+    text-align:center;
+    color:#f87171;
+}
+
+.refresh{
+    margin-bottom:18px;
+    padding:10px 16px;
+    border:0;
+    border-radius:9px;
     background:#67e8f9;
     color:#041018;
     font-weight:800;
     cursor:pointer;
-    margin-top:4px;
 }
 
-.whatsapp-btn{
-    display:block;
-    text-align:center;
-    padding:13px;
-    background:#25d366;
-    color:#06130b;
-    border-radius:10px;
-    text-decoration:none;
-    font-weight:800;
-    margin-top:10px;
-}
-
-.footer{
-    text-align:center;
-    padding:18px;
-    color:#64748b;
-    font-size:12px;
-}
-
-@media(max-width:600px){
-    header{
-        padding:0 15px;
+@media(max-width:700px){
+    .card{
+        overflow-x:auto;
     }
 
-    .logo{
-        font-size:19px;
-    }
-
-    .wrapper{
-        margin:15px auto;
-        padding:0 10px;
-    }
-
-    .agent-top{
-        padding:20px;
-    }
-
-    .chat{
-        height:390px;
-    }
-
-    .message{
-        max-width:90%;
-    }
-
-    .input-area{
-        padding:12px;
-    }
-
-    .send{
-        padding:0 15px;
+    table{
+        min-width:750px;
     }
 }
 </style>
@@ -277,92 +123,51 @@ header{
 
 <header>
     <div class="logo">Nexa<span>Flow</span> AI</div>
-
-    <div class="status">
-        <span class="dot"></span>
-        AI Online
-    </div>
 </header>
 
-<div class="wrapper">
+<div class="container">
 
-<div class="agent-card">
+<h1>Lead Dashboard</h1>
 
-<div class="agent-top">
-    <h1>Nexa Dental Clinic</h1>
-    <p>AI Customer Support & Lead Generation Agent</p>
+<div class="subtitle">
+    Customer leads captured by your AI agent.
 </div>
 
-<div class="chat" id="chat">
-
-<div class="message bot">
-    Hi! 👋 Welcome to Nexa Dental Clinic.<br><br>
-    I'm your AI assistant. I can help you with our services,
-    clinic hours, location, or appointment booking.
-</div>
-
-</div>
-
-<div class="quick">
-
-<button onclick="quickReply('services')">Services</button>
-<button onclick="quickReply('hours')">Hours</button>
-<button onclick="quickReply('location')">Location</button>
-<button onclick="quickReply('book')">Book Appointment</button>
-
-</div>
-
-<div class="input-area">
-
-<input
-    id="userInput"
-    type="text"
-    placeholder="Type your message..."
-    onkeydown="if(event.key==='Enter') sendMessage()"
->
-
-<button class="send" onclick="sendMessage()">Send</button>
-
-</div>
-
-<div class="lead" id="lead">
-
-<h3>Book Your Appointment</h3>
-
-<div class="field">
-<label>Full Name</label>
-<input id="name" type="text" placeholder="Your full name">
-</div>
-
-<div class="field">
-<label>WhatsApp / Phone Number</label>
-<input id="phone" type="tel" placeholder="WhatsApp / Phone Number">
-</div>
-
-<div class="field">
-<label>Preferred Appointment Time</label>
-<input id="time" type="text" placeholder="e.g. Tomorrow 5 PM">
-</div>
-
-<button class="book-btn" onclick="submitLead()">
-    Submit Appointment Request
+<button class="refresh" onclick="loadLeads()">
+    Refresh Leads
 </button>
 
-</div>
+<div class="card">
 
-</div>
+<table>
 
-<div class="footer">
-    Powered by NexaFlow AI
+<thead>
+<tr>
+    <th>Name</th>
+    <th>WhatsApp / Phone</th>
+    <th>Preferred Time</th>
+    <th>Date</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody id="leadsTable">
+
+<tr>
+    <td colspan="5" class="loading">
+        Loading leads...
+    </td>
+</tr>
+
+</tbody>
+
+</table>
+
 </div>
 
 </div>
 
 <script>
-
-/* =========================
-   SUPABASE CONFIGURATION
-========================= */
 
 const SUPABASE_URL =
 "https://yejjedfoaueslbccqvdp.supabase.co";
@@ -370,329 +175,95 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_kgBAGamF48DsEqcbGS9rmA_Z9MM3WiJ";
 
-/* Business WhatsApp number */
-const BUSINESS_WHATSAPP =
-"923346601267";
 
+async function loadLeads(){
 
-/* =========================
-   CHAT FUNCTIONS
-========================= */
+    const table =
+        document.getElementById("leadsTable");
 
-function add(text,type){
-
-    const chat =
-        document.getElementById("chat");
-
-    const div =
-        document.createElement("div");
-
-    div.className =
-        "message " + type;
-
-    div.innerHTML =
-        text;
-
-    chat.appendChild(div);
-
-    chat.scrollTop =
-        chat.scrollHeight;
-}
-
-
-function quickReply(type){
-
-    if(type==="services"){
-
-        add("What services do you offer?","user");
-
-        setTimeout(function(){
-
-            add(
-                "<b>Our Services</b><br><br>" +
-                "🦷 Dental Checkup<br>" +
-                "🧼 Dental Cleaning<br>" +
-                "🦷 Dental Fillings<br>" +
-                "✨ Teeth Whitening",
-                "bot"
-            );
-
-        },400);
-
-    }
-
-
-    if(type==="hours"){
-
-        add("What are your clinic hours?","user");
-
-        setTimeout(function(){
-
-            add(
-                "<b>Clinic Hours</b><br><br>" +
-                "Monday – Sunday<br>" +
-                "10:00 AM – 10:00 PM",
-                "bot"
-            );
-
-        },400);
-
-    }
-
-
-    if(type==="location"){
-
-        add("Where are you located?","user");
-
-        setTimeout(function(){
-
-            add(
-                "<b>Location</b><br><br>" +
-                "Nexa Dental Clinic<br>" +
-                "Karachi, Pakistan",
-                "bot"
-            );
-
-        },400);
-
-    }
-
-
-    if(type==="book"){
-
-        add("I want to book an appointment.","user");
-
-        setTimeout(function(){
-
-            add(
-                "Sure! Please fill in your details below and we'll prepare your appointment request.",
-                "bot"
-            );
-
-            document.getElementById("lead").style.display =
-                "block";
-
-            document.getElementById("lead").scrollIntoView({
-                behavior:"smooth"
-            });
-
-        },400);
-
-    }
-
-}
-
-
-function sendMessage(){
-
-    const input =
-        document.getElementById("userInput");
-
-    const text =
-        input.value.trim();
-
-    if(!text) return;
-
-    add(text,"user");
-
-    input.value="";
-
-    const lower =
-        text.toLowerCase();
-
-    setTimeout(function(){
-
-        if(
-            lower.includes("service") ||
-            lower.includes("offer") ||
-            lower.includes("treatment")
-        ){
-
-            add(
-                "<b>Our Services</b><br><br>" +
-                "🦷 Dental Checkup<br>" +
-                "🧼 Dental Cleaning<br>" +
-                "🦷 Dental Fillings<br>" +
-                "✨ Teeth Whitening",
-                "bot"
-            );
-
-        }
-
-        else if(
-            lower.includes("hour") ||
-            lower.includes("open") ||
-            lower.includes("close")
-        ){
-
-            add(
-                "<b>Clinic Hours</b><br><br>" +
-                "Monday – Sunday<br>" +
-                "10:00 AM – 10:00 PM",
-                "bot"
-            );
-
-        }
-
-        else if(
-            lower.includes("location") ||
-            lower.includes("where") ||
-            lower.includes("address")
-        ){
-
-            add(
-                "<b>Location</b><br><br>" +
-                "Nexa Dental Clinic<br>" +
-                "Karachi, Pakistan",
-                "bot"
-            );
-
-        }
-
-        else if(
-            lower.includes("book") ||
-            lower.includes("appointment") ||
-            lower.includes("schedule")
-        ){
-
-            add(
-                "Absolutely! Please complete the appointment form below.",
-                "bot"
-            );
-
-            document.getElementById("lead").style.display =
-                "block";
-
-            document.getElementById("lead").scrollIntoView({
-                behavior:"smooth"
-            });
-
-        }
-
-        else{
-
-            add(
-                "I can help you with our <b>services</b>, " +
-                "<b>clinic hours</b>, <b>location</b>, or " +
-                "<b>booking an appointment</b>.",
-                "bot"
-            );
-
-        }
-
-    },400);
-
-}
-
-
-/* =========================
-   SAVE LEAD TO SUPABASE
-========================= */
-
-async function submitLead(){
-
-    const name =
-        document.getElementById("name").value.trim();
-
-    const phone =
-        document.getElementById("phone").value.trim();
-
-    const time =
-        document.getElementById("time").value.trim();
-
-
-    if(!name || !phone || !time){
-
-        alert("Please complete all fields.");
-
-        return;
-    }
+    table.innerHTML =
+        '<tr><td colspan="5" class="loading">Loading leads...</td></tr>';
 
 
     try{
 
         const response =
             await fetch(
-                SUPABASE_URL + "/rest/v1/leads",
+                SUPABASE_URL +
+                "/rest/v1/leads?select=*&order=created_at.desc",
                 {
-                    method:"POST",
+                    method:"GET",
 
                     headers:{
-                        "Content-Type":"application/json",
                         "apikey":SUPABASE_KEY,
                         "Authorization":
-                            "Bearer " + SUPABASE_KEY,
-                        "Prefer":"return=minimal"
-                    },
-
-                    body:JSON.stringify({
-
-                        name:name,
-
-                        phone:phone,
-
-                        preferred_time:time
-
-                    })
+                            "Bearer " + SUPABASE_KEY
+                    }
                 }
             );
 
 
         if(!response.ok){
 
-            const errorText =
+            const error =
                 await response.text();
 
-            console.error(
-                "Supabase error:",
-                errorText
-            );
-
-            throw new Error(
-                "Lead could not be saved."
-            );
+            throw new Error(error);
         }
 
 
-        /* WhatsApp message */
-
-        const message =
-            "New Appointment Lead - Nexa Dental Clinic\n\n" +
-            "Name: " + name + "\n" +
-            "Phone: " + phone + "\n" +
-            "Preferred Time: " + time;
+        const leads =
+            await response.json();
 
 
-        const whatsappURL =
-            "https://wa.me/" +
-            BUSINESS_WHATSAPP +
-            "?text=" +
-            encodeURIComponent(message);
+        if(leads.length === 0){
+
+            table.innerHTML =
+                '<tr><td colspan="5" class="empty">No leads yet.</td></tr>';
+
+            return;
+        }
 
 
-        add(
-            "Thank you, <b>" +
-            name +
-            "</b>! Your appointment request has been saved successfully.",
-            "bot"
-        );
+        table.innerHTML = "";
 
 
-        document.getElementById("lead").innerHTML =
+        leads.forEach(function(lead){
 
-            "<h3>Lead Saved ✅</h3>" +
+            const row =
+                document.createElement("tr");
 
-            "<p style='color:#94a3b8;margin-bottom:12px'>" +
-            "Your appointment request has been saved. " +
-            "You can now send the lead to our team via WhatsApp." +
-            "</p>" +
 
-            "<a class='whatsapp-btn' " +
-            "href='" + whatsappURL + "' " +
-            "target='_blank'>" +
-            "Send Lead on WhatsApp →" +
-            "</a>";
+            const date =
+                lead.created_at
+                ? new Date(lead.created_at).toLocaleString()
+                : "-";
 
+
+            row.innerHTML =
+
+                "<td>" +
+                escapeHTML(lead.name) +
+                "</td>" +
+
+                "<td>" +
+                escapeHTML(lead.phone) +
+                "</td>" +
+
+                "<td>" +
+                escapeHTML(lead.preferred_time) +
+                "</td>" +
+
+                "<td>" +
+                escapeHTML(date) +
+                "</td>" +
+
+                "<td class='status'>New</td>";
+
+
+            table.appendChild(row);
+
+        });
 
     }
 
@@ -700,15 +271,30 @@ async function submitLead(){
 
         console.error(error);
 
-        alert(
-            "The lead could not be saved. Please try again."
-        );
+        table.innerHTML =
+            '<tr><td colspan="5" class="error">' +
+            'Could not load leads.' +
+            '</td></tr>';
 
     }
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
+
+
+loadLeads();
 
 </script>
 
 </body>
-      </html>
+</html>
