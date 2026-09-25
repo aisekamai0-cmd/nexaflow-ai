@@ -173,7 +173,7 @@ async function loadLeads(){
 
     const response = await fetch(
       SUPABASE_URL +
-      "/rest/v1/leads?select=id,name,phone,preferred_time,created_at&order=created_at.desc",
+      "/rest/v1/leads?select=id,name,phone,preferred_time,created_at,status&order=created_at.desc",
       {
         method:"GET",
         headers:{
@@ -207,6 +207,8 @@ async function loadLeads(){
         ? new Date(lead.created_at).toLocaleString()
         : "-";
 
+      const currentStatus = lead.status || "New";
+
       row.innerHTML = `
         <td>${escapeHTML(lead.name)}</td>
 
@@ -218,10 +220,10 @@ async function loadLeads(){
 
         <td>
           <select onchange="changeStatus(${lead.id}, this.value)">
-            <option value="New">New</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Booked">Booked</option>
-            <option value="Closed">Closed</option>
+            <option value="New" ${currentStatus==="New"?"selected":""}>New</option>
+            <option value="Contacted" ${currentStatus==="Contacted"?"selected":""}>Contacted</option>
+            <option value="Booked" ${currentStatus==="Booked"?"selected":""}>Booked</option>
+            <option value="Closed" ${currentStatus==="Closed"?"selected":""}>Closed</option>
           </select>
         </td>
       `;
@@ -241,15 +243,46 @@ async function loadLeads(){
   }
 }
 
+
 async function changeStatus(id,status){
 
-  /*
-   Status will be connected to the database
-   after the status column is added.
-  */
+  try{
 
-  alert("Status selected: " + status);
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/leads?id=eq." + id,
+      {
+        method:"PATCH",
+
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Authorization":"Bearer " + SUPABASE_KEY,
+          "Content-Type":"application/json",
+          "Prefer":"return=minimal"
+        },
+
+        body:JSON.stringify({
+          status:status
+        })
+      }
+    );
+
+    if(!response.ok){
+
+      const error = await response.text();
+
+      throw new Error(error);
+    }
+
+    console.log("Status saved:", status);
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Could not save status.");
+  }
 }
+
 
 function escapeHTML(value){
 
@@ -260,6 +293,7 @@ function escapeHTML(value){
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
 }
+
 
 loadLeads();
 
