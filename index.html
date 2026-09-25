@@ -3,131 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NexaFlow AI — AI Automation for Businesses</title>
-<meta name="description" content="NexaFlow AI helps businesses automate customer support, capture leads and grow with practical AI agents.">
+<title>NexaFlow AI - Lead Dashboard</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+
 body{
-font-family:Inter,Arial,sans-serif;
-background:#050816;
-color:#f8fafc;
-line-height:1.6;
-overflow-x:hidden;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#080b12;
+  color:#fff;
 }
-body:before{
-content:"";
-position:fixed;
-inset:-30%;
-background:
-radial-gradient(circle at 20% 20%,rgba(34,211,238,.12),transparent 25%),
-radial-gradient(circle at 80% 30%,rgba(99,102,241,.13),transparent 25%),
-radial-gradient(circle at 50% 90%,rgba(14,165,233,.08),transparent 25%);
-z-index:-1;
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 18px;
 }
-.container{max-width:1150px;margin:auto;padding:0 24px}
-nav{
-display:flex;justify-content:space-between;align-items:center;
-padding:25px 0;border-bottom:1px solid rgba(255,255,255,.06);
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:30px;
 }
-.logo{font-size:25px;font-weight:800;letter-spacing:-1px}
-.logo span{color:#67e8f9}
-nav a{color:#94a3b8;text-decoration:none;margin-left:28px;font-size:14px}
-nav a:hover{color:#fff}
-.hero{text-align:center;padding:105px 10px 90px}
-.badge{
-display:inline-block;padding:8px 16px;
-border:1px solid rgba(103,232,249,.25);
-border-radius:40px;color:#67e8f9;
-background:rgba(103,232,249,.06);
-font-size:12px;font-weight:700;letter-spacing:1.5px;
-margin-bottom:25px;
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
 }
-h1{
-font-size:clamp(45px,8vw,82px);
-line-height:1;
-letter-spacing:-3px;
-max-width:900px;margin:auto;
-background:linear-gradient(90deg,#fff,#b9c7dc,#67e8f9);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+
+.logo span{
+  color:#8b5cf6;
 }
-.hero p{
-max-width:680px;margin:28px auto 32px;
-color:#94a3b8;font-size:18px;
+
+.subtitle{
+  color:#9ca3af;
+  margin-top:5px;
 }
-.buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn{
-display:inline-block;padding:15px 25px;border-radius:12px;
-text-decoration:none;font-weight:700;transition:.2s;
+
+button{
+  background:#8b5cf6;
+  color:white;
+  border:0;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
 }
-.primary{
-background:linear-gradient(135deg,#67e8f9,#38bdf8);
-color:#041018;
-box-shadow:0 10px 35px rgba(56,189,248,.18);
-}
-.primary:hover{transform:translateY(-2px)}
-.secondary{
-border:1px solid #263449;color:#fff;
-background:rgba(255,255,255,.03);
-}
-section{padding:85px 0}
-.section-title{text-align:center;font-size:40px;letter-spacing:-1px}
-.section-subtitle{
-text-align:center;color:#64748b;
-margin:12px auto 45px;
-max-width:600px;
-}
-.grid{
-display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
-}
+
 .card{
-background:rgba(15,23,42,.65);
-border:1px solid rgba(148,163,184,.12);
-padding:30px;border-radius:20px;
-backdrop-filter:blur(12px);
-transition:.25s;
+  background:#111827;
+  border:1px solid #273244;
+  border-radius:16px;
+  overflow:hidden;
 }
-.card:hover{
-transform:translateY(-5px);
-border-color:rgba(103,232,249,.3);
+
+table{
+  width:100%;
+  border-collapse:collapse;
 }
-.card h3{margin-bottom:12px}
-.card p{color:#94a3b8;font-size:15px}
-.demo{
-background:
-linear-gradient(135deg,rgba(14,165,233,.10),rgba(99,102,241,.10));
-border:1px solid rgba(103,232,249,.18);
-border-radius:28px;padding:65px 25px;text-align:center;
+
+th,td{
+  padding:15px;
+  text-align:left;
+  border-bottom:1px solid #273244;
 }
-.demo p{
-color:#94a3b8;margin:15px auto 28px;
-max-width:620px;
+
+th{
+  color:#a78bfa;
+  font-size:13px;
 }
-.steps{
-display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+
+td{
+  color:#e5e7eb;
 }
-.step{
-padding:30px;
-border-left:1px solid #263449;
+
+.status{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  background:#064e3b;
+  color:#6ee7b7;
+  font-size:12px;
 }
-.step span{color:#67e8f9;font-size:12px;font-weight:800;letter-spacing:1px}
-.step h3{margin:12px 0}
-.step p{color:#94a3b8}
-.cta{text-align:center;padding-bottom:100px}
-footer{
-border-top:1px solid rgba(255,255,255,.07);
-padding:30px 0;color:#64748b;
-text-align:center;font-size:13px;
+
+.message{
+  padding:30px;
+  text-align:center;
+  color:#9ca3af;
 }
-@media(max-width:800px){
-nav a{display:none}
-.grid,.steps{grid-template-columns:1fr}
-.hero{padding-top:65px}
-section{padding:60px 0}
-h1{letter-spacing:-2px}
-.demo{padding:45px 20px}
+
+@media(max-width:700px){
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .card{
+    overflow-x:auto;
+  }
+
+  table{
+    min-width:700px;
+  }
 }
 </style>
 </head>
@@ -136,60 +116,132 @@ h1{letter-spacing:-2px}
 
 <div class="container">
 
-<nav>
-  <div class="logo">NexaFlow <span>AI</span></div>
-  <div>
-    <a href="#services">Services</a>
-    <a href="#demo">Live Demo</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="badge">AI AUTOMATION FOR BUSINESSES</div>
-
-  <h1>Turn repetitive work into automated growth.</h1>
-
-  <p>
-    NexaFlow AI helps businesses capture leads, answer customers
-    and automate everyday processes with practical AI agents.
-  </p>
-
-  <div class="buttons">
-    <a class="btn primary"
-       href="https://aisekamai0-cmd.github.io/nexaflow-ai/agent.html"
-       target="_blank">
-       Try Live Demo →
-    </a>
-
-    <a class="btn secondary" href="#services">
-      Explore Services
-    </a>
-  </div>
-</section>
-
-<section id="services">
-  <h2 class="section-title">What We Automate</h2>
-  <p class="section-subtitle">
-    Practical AI solutions designed for real businesses.
-  </p>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>🤖 AI Agents</h3>
-      <p>
-        Intelligent agents that interact with customers and handle
-        repetitive business tasks.
-      </p>
+  <div class="header">
+    <div>
+      <div class="logo">NexaFlow <span>AI</span></div>
+      <div class="subtitle">Lead Dashboard</div>
     </div>
 
-    <div class="card">
-      <h3>💬 Customer Support</h3>
-      <p>
-        Answer common questions instantly and provide customers
-        with information 24/7.
-      </p>
+    <button onclick="loadLeads()">Refresh Leads</button>
+  </div>
+
+  <div class="card">
+    <div id="message" class="message">
+      Loading leads...
     </div>
 
-    <div
+    <table id="leadTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>WhatsApp / Phone</th>
+          <th>Preferred Time</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="leadBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://yejjedfoaueslbccqvdp.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_kgBAGamF48DsEqcbGS9rmA_Z9MM3WiJ";
+
+async function loadLeads(){
+
+  const message = document.getElementById("message");
+  const table = document.getElementById("leadTable");
+  const body = document.getElementById("leadBody");
+
+  message.style.display = "block";
+  message.innerText = "Loading leads...";
+  table.style.display = "none";
+  body.innerHTML = "";
+
+  try{
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/leads?select=id,name,phone,preferred_time,created_at&order=created_at.desc",
+      {
+        method:"GET",
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Authorization":"Bearer " + SUPABASE_KEY,
+          "Content-Type":"application/json"
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    console.log("Supabase response:", data);
+
+    if(!response.ok){
+      throw new Error(
+        data.message ||
+        data.error_description ||
+        JSON.stringify(data)
+      );
+    }
+
+    if(!Array.isArray(data) || data.length === 0){
+      message.innerText = "No leads yet";
+      return;
+    }
+
+    data.forEach(lead => {
+
+      const row = document.createElement("tr");
+
+      const date = lead.created_at
+        ? new Date(lead.created_at).toLocaleString()
+        : "-";
+
+      row.innerHTML = `
+        <td>${escapeHTML(lead.name)}</td>
+        <td>${escapeHTML(lead.phone)}</td>
+        <td>${escapeHTML(lead.preferred_time)}</td>
+        <td>${escapeHTML(date)}</td>
+        <td><span class="status">New</span></td>
+      `;
+
+      body.appendChild(row);
+    });
+
+    message.style.display = "none";
+    table.style.display = "table";
+
+  }catch(error){
+
+    console.error("Lead loading error:", error);
+
+    message.innerText =
+      "Could not load leads: " + error.message;
+  }
+}
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+loadLeads();
+
+</script>
+
+</body>
+</html>
